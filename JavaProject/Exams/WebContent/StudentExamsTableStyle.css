@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+th{
+background-color:#337ab7;
+color:#ffffff;
+text-align: center;
+}
+
+tr{
+color:#337ab7;
+font-weight:bold;
+}
+
+.row{
+margin-top:50px;
+}

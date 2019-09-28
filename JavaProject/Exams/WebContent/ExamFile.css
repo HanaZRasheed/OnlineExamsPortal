@@ -1,0 +1,156 @@
+body, html{
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  
+  display: table;
+  
+  font-family: Helvetica;
+  color:white;
+  font-weight: bold;
+}
+body{
+  background: #092756;
+ background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top, rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg, #670d10 0%, #092756 100%);
+ background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg, #670d10 0%,#092756 100%);
+ background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), linear-gradient(to bottom, rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), linear-gradient(135deg, #670d10 0%,#092756 100%);
+}
+
+.wrap{  
+  display: table-cell;
+  vertical-align: middle;
+
+  @outColor:        #79C5FF;
+  @unselectedColor: #FFFFFF;
+  @selectedColor:   rgb(197, 65, 110);
+
+  @circleSize:          10px;
+  @circleBorderWidth:   8px;
+  @borderRadius:        40px;     // Border radius for the circles
+  @labelHeight:         40px;     // Height of the labels
+
+  @distanceBetweenRadios: 50px; // vertical distance between radio buttons
+
+
+  @radioLeftOffset: -40px;
+  @labelWidth: 100px;
+
+
+
+  .RadioBtnsWrap{
+    display: inline-block;
+    position: relative;
+    width: @labelWidth + ( @radioLeftOffset * -1) ;
+
+  }
+
+
+  .RadioBtnsWrap label{
+    display: inline-block;
+    position: relative;
+    margin-left: @radioLeftOffset * -1;
+    text-align: left;
+
+    height:      @labelHeight;
+    line-height: @labelHeight;
+
+    min-width: @labelWidth;
+    font-size: 16px;
+  }
+
+
+
+
+  .RadioBtnsWrap label:not(:nth-of-type(1)){
+    margin-top: @distanceBetweenRadios - 33;
+  }
+
+  .Radio{
+    -webkit-appearance: none;
+    height: 0;
+    width: 0;
+
+    opacity: 0; 
+
+    margin: 0; padding: 0;
+    outline: 0; 
+    border: none;
+  }
+
+  .RadioBtnsWrap label::after{
+    content: 'x'; 
+    color: transparent;
+
+    position: absolute;
+    left: -4px + @radioLeftOffset;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    width:              @circleSize;
+    height:             @circleSize;
+    background-color:   @unselectedColor;
+    display: inline-block;
+
+    border-bottom-left-radius:  @borderRadius;
+    border-bottom-right-radius: @borderRadius;
+    border-top-left-radius:     @borderRadius;
+    border-top-right-radius:    @borderRadius;
+
+    border-color: @outColor;
+    border-style: solid;
+    border-width: @circleBorderWidth;
+
+    transition:         background-color 0.6s, border-width 0.4s, width 0.6s, height 0.6s, left 0.6s  ;
+    -webkit-transition: background-color 0.6s, border-width 0.4s, width 0.6s, height 0.6s, left 0.6s  ;
+
+
+    -webkit-box-shadow:   0px 2px 3px -1px rgba(0,0,0,0.75);
+    box-shadow:           0px 2px 3px -1px rgba(0,0,0,0.75);
+  }
+
+  .Radio:checked + label::after{
+    background-color: @selectedColor;
+    width: 20px;
+    height: 20px;
+    left: -7px + @radioLeftOffset;
+    border-width: 6px;
+
+    -webkit-box-shadow:   0px 2px 3px -1px rgba(0,0,0,0.75), inset 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+    box-shadow:           0px 2px 3px -1px rgba(0,0,0,0.75), inset 0px 0px 5px 1px rgba(0, 0, 0, 0.75);
+  }
+
+
+  .RadioBtnsWrap label:not(:nth-of-type(1))::before{
+    content: '';
+    position: absolute;
+
+    left: 5px + @radioLeftOffset;
+
+    // Height of the vertical bar
+    height: @distanceBetweenRadios + 7;
+    width:  @circleBorderWidth;
+
+    display: inline-block;
+    background-color: @outColor;
+
+
+    -webkit-box-shadow:   1px 4px 2px 1px rgba(0, 0, 0, 0.25);
+    box-shadow:           1px 4px 2px 1px rgba(0, 0, 0, 0.25);
+
+  }
+
+  .RadioBtnsWrap label::before{
+    bottom:  (@circleSize + ( @circleBorderWidth * 2 ) ) + 2;
+  }
+
+  .Radio:checked + label + input + label::before {
+    height: @distanceBetweenRadios + 2;
+
+    transition:         height .0s linear .3s;
+    -webkit-transition: height .0s linear .3s;
+  }
+}
